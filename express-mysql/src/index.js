@@ -1,5 +1,15 @@
 const express = require("express");
 const app = express();
+const usersRoutes = require("./routes/users");
+const logs = require("./middleware/logs");
+const { logRequest, logRequestDateTime } = logs;
+
+// Example middleware
+app.use(logRequest);
+app.use(logRequestDateTime);
+app.use(express.json());
+
+app.use("/users", usersRoutes);
 
 //String Message
 app.get("/", (req, res) => {
